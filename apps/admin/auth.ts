@@ -8,7 +8,7 @@ export const { auth, handlers } = NextAuth({
   providers: [Google({ clientId: process.env.AUTH_GOOGLE_ID, clientSecret: process.env.AUTH_GOOGLE_SECRET })],
   callbacks: {
     async authorized({ auth }) {
-      return auth?.user?.email ? true : false;
+      return auth?.user?.role === "ADMIN" || auth?.user?.role === "AGENT";
     },
     async session({ session, user }) {
       if (session.user) session.user.role = user.role;
