@@ -1,4 +1,4 @@
-import { auth } from "../../../../../../auth";
+import { auth } from "../../../../../auth";
 import { db } from "@miloud-sabri/database";
 import { NextResponse } from "next/server";
 
