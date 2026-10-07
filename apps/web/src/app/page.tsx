@@ -28,7 +28,7 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-          <Link href="#contact" className="rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-glass">
+          <Link href="/contact" className="rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-glass">
             Parlons voyage
           </Link>
         </div>
@@ -49,7 +49,7 @@ export default function HomePage() {
               Une équipe locale, un accompagnement humain et une expérience simple du premier clic au retour.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/destinations" className="inline-flex items-center gap-2 rounded-full bg-navy px-7 py-4 font-medium text-white transition hover:-translate-y-1 hover:shadow-glass">
+              <Link href="/sejours" className="inline-flex items-center gap-2 rounded-full bg-navy px-7 py-4 font-medium text-white transition hover:-translate-y-1 hover:shadow-glass">
                 Découvrir nos voyages <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="#contact" className="rounded-full glass px-7 py-4 font-medium text-navy transition hover:-translate-y-1">
