@@ -13,7 +13,7 @@ export const bookingSchema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().optional().or(z.literal("")),
   phone: z.string().trim().min(6).max(30),
-  travelDate: z.string().optional().or(z.literal("")),
+  travelDate: z.string().refine((value) => !value || !Number.isNaN(Date.parse(value)), "Date invalide.").optional().or(z.literal("")),
   notes: z.string().trim().max(2000).optional()
 });
 
