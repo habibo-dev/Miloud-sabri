@@ -1,0 +1,1 @@
+{"name":"@miloud-sabri/database","private":true,"version":"0.1.0","main":"src/index.ts","scripts":{"generate":"prisma generate","typecheck":"tsc --noEmit"},"dependencies":{"@prisma/client":"^6.15.0"},"devDependencies":{"prisma":"^6.15.0","typescript":"^5.8.3"}}
