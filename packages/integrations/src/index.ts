@@ -6,7 +6,7 @@ export type HotelSearch = { cityCode: string; checkInDate: string; checkOutDate:
 
 export async function searchFlights(_input: FlightSearch): Promise<FlightResult[]> {
   if (!process.env.AMADEUS_CLIENT_ID || !process.env.AMADEUS_CLIENT_SECRET) return [];
-  return [];
+  // Provider intentionally remains disabled until the agency supplies a current contracted API.\n  return [];
 }
 
 export async function searchHotels(_input: HotelSearch): Promise<unknown[]> {
