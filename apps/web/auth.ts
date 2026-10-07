@@ -8,14 +8,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET
-    })
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
   ],
   callbacks: {
     async session({ session, user }) {
-      if (session.user) session.user.role = user.role;
+      const role = (user as unknown as { role?: typeof session.user.role }).role;
+      if (session.user && role) session.user.role = role;
       return session;
-    }
+    },
   },
-  pages: { signIn: "/connexion" }
+  pages: { signIn: "/connexion" },
 });
