@@ -1,1 +1,13 @@
-{"name":"@miloud-sabri/integrations","private":true,"version":"0.1.0","main":"src/index.ts","dependencies":{"resend":"^6.0.0"},"devDependencies":{"typescript":"^5.8.3"}}
+{
+  "name": "@miloud-sabri/integrations",
+  "private": true,
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "resend": "^6.0.0",
+    "cloudinary": "^2.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
