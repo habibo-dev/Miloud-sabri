@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Miloud Sabri Voyage | Voyagez autrement",
-  description: "Agence de voyage algérienne — séjours, Omra, visas et voyages sur mesure.",
+  description: "Miloud Sabri Voyage — séjours, Omra, visas et voyages sur mesure depuis Aïn Témouchent.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
