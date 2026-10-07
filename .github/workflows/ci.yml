@@ -23,13 +23,17 @@ jobs:
       - name: Commit generated lockfile
         if: github.event_name == 'push'
         run: |
-          if git diff --quiet -- pnpm-lock.yaml; then
+          if [ ! -f pnpm-lock.yaml ]; then
+            echo "pnpm-lock.yaml was not generated"
+            exit 1
+          fi
+          git add pnpm-lock.yaml
+          if git diff --cached --quiet -- pnpm-lock.yaml; then
             echo "Lockfile is already committed."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pnpm-lock.yaml
           git commit -m "chore: add pnpm lockfile"
           git push origin "HEAD:$GITHUB_REF_NAME"
       - run: pnpm --filter @miloud-sabri/database generate
