@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  AGENT
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  WON
+  LOST
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String?    @unique
+  phone         String?    @unique
+  role          UserRole   @default(CUSTOMER)
+  image         String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  passports     Passport[]
+  bookings      Booking[]
+  leads         Lead[]     @relation("LeadOwner")
+  auditLogs     AuditLog[]
+}
+
+model Passport {
+  id          String   @id @default(cuid())
+  userId      String
+  number      String
+  nationality String?
+  issuedAt    DateTime?
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Destination {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  country     String
+  region      String?
+  description String?
+  imageUrl    String?
+  featured    Boolean   @default(false)
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  packages    Package[]
+
+  @@index([active, featured])
+}
+
+model Package {
+  id             String      @id @default(cuid())
+  destinationId  String
+  slug           String      @unique
+  title          String
+  summary        String?
+  description    String?
+  durationDays   Int
+  priceDzd       Decimal     @db.Decimal(14,2)
+  currency       String      @default("DZD")
+  imageUrl       String?
+  featured       Boolean     @default(false)
+  active         Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  destination    Destination @relation(fields: [destinationId], references: [id], onDelete: Restrict)
+  bookings       Booking[]
+
+  @@index([destinationId, active])
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  reference     String        @unique
+  userId        String?
+  packageId     String?
+  status        BookingStatus @default(PENDING)
+  totalDzd      Decimal       @db.Decimal(14,2)
+  notes         String?
+  travelDate    DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  user          User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  package       Package?      @relation(fields: [packageId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([userId])
+}
+
+model Lead {
+  id          String     @id @default(cuid())
+  name        String
+  email       String?
+  phone       String?
+  source      String?
+  message     String?
+  status      LeadStatus @default(NEW)
+  ownerId     String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  owner       User?      @relation("LeadOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+}
