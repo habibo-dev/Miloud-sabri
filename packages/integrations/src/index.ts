@@ -2,10 +2,14 @@ import { Resend } from "resend";
 
 export type FlightSearch = { origin: string; destination: string; departureDate: string; adults?: number };
 export type FlightResult = { provider: string; id: string; price: string; currency: string; raw?: unknown };
+export type HotelSearch = { cityCode: string; checkInDate: string; checkOutDate: string; adults?: number };
 
 export async function searchFlights(_input: FlightSearch): Promise<FlightResult[]> {
-  // Amadeus Self-Service was decommissioned July 17, 2026. Keep this provider boundary
-  // until the agency has an active Enterprise API contract and credentials.
+  if (!process.env.AMADEUS_CLIENT_ID || !process.env.AMADEUS_CLIENT_SECRET) return [];
+  return [];
+}
+
+export async function searchHotels(_input: HotelSearch): Promise<unknown[]> {
   if (!process.env.AMADEUS_CLIENT_ID || !process.env.AMADEUS_CLIENT_SECRET) return [];
   return [];
 }
