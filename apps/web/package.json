@@ -21,7 +21,8 @@
     "next-auth": "^5.0.0-beta.32",
     "@auth/prisma-adapter": "^2.11.3",
     "@miloud-sabri/ai": "workspace:*",
-    "@miloud-sabri/integrations": "workspace:*"
+    "@miloud-sabri/integrations": "workspace:*",
+    "@miloud-sabri/payments": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
