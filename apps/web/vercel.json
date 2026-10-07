@@ -1,4 +1,5 @@
 {
-  "installCommand": "npx --yes pnpm@11.28.0 install --no-frozen-lockfile",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --global pnpm@11.28.0 && pnpm install --no-frozen-lockfile",
   "buildCommand": "pnpm build"
 }
