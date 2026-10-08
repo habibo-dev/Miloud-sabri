@@ -9,6 +9,18 @@ type AccountBooking = {
   package: { title: string } | null;
 };
 
+type AccountDocument = {
+  id: string;
+  name: string;
+  status: string;
+};
+
+type AccountNotification = {
+  id: string;
+  title: string;
+  body: string;
+};
+
 export default async function AccountPage() {
   const session = await auth();
   if (!session?.user?.email) redirect("/connexion");
@@ -26,6 +38,8 @@ export default async function AccountPage() {
   });
 
   const bookings = (user?.bookings ?? []) as AccountBooking[];
+  const documents = (user?.documents ?? []) as AccountDocument[];
+  const notifications = (user?.notifications ?? []) as AccountNotification[];
 
   return (
     <main className="min-h-screen bg-cream px-6 py-20">
@@ -63,8 +77,8 @@ export default async function AccountPage() {
           <section className="glass rounded-glass p-6">
             <h2 className="text-xl font-semibold text-navy">Documents</h2>
             <div className="mt-5 space-y-3">
-              {user?.documents.length ? (
-                user.documents.map((d) => (
+              {documents.length ? (
+                documents.map((d) => (
                   <div key={d.id} className="rounded-2xl bg-white/70 p-4">
                     <p className="font-semibold text-ink">{d.name}</p>
                     <p className="mt-1 text-sm text-muted">{d.status}</p>
@@ -79,8 +93,8 @@ export default async function AccountPage() {
           <section className="glass rounded-glass p-6 md:col-span-2">
             <h2 className="text-xl font-semibold text-navy">Notifications</h2>
             <div className="mt-5 space-y-3">
-              {user?.notifications.length ? (
-                user.notifications.map((n) => (
+              {notifications.length ? (
+                notifications.map((n) => (
                   <div key={n.id} className="rounded-2xl bg-white/70 p-4">
                     <p className="font-semibold text-ink">{n.title}</p>
                     <p className="mt-1 text-sm text-muted">{n.body}</p>
