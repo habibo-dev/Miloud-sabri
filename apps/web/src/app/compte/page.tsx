@@ -1,10 +1,13 @@
 import { auth } from "../../../auth";
-import { db, Prisma } from "@miloud-sabri/database";
+import { db } from "@miloud-sabri/database";
 import { redirect } from "next/navigation";
 
-type BookingWithPackage = Prisma.BookingGetPayload<{
-  include: { package: { include: { destination: true } } };
-}>;
+type AccountBooking = {
+  id: string;
+  reference: string;
+  status: string;
+  package: { title: string } | null;
+};
 
 export default async function AccountPage() {
   const session = await auth();
@@ -22,7 +25,7 @@ export default async function AccountPage() {
     },
   });
 
-  const bookings: BookingWithPackage[] = user?.bookings ?? [];
+  const bookings = (user?.bookings ?? []) as AccountBooking[];
 
   return (
     <main className="min-h-screen bg-cream px-6 py-20">
