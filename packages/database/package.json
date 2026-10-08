@@ -13,6 +13,7 @@
   },
   "scripts": {
     "generate": "prisma generate",
+    "postinstall": "prisma generate",
     "seed": "tsx prisma/seed.ts",
     "typecheck": "tsc --noEmit"
   }
