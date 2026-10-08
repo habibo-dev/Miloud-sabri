@@ -8,6 +8,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const item = await db.package.findUnique({ where: { slug }, include: { destination: true } });
   if (!item || !item.active) notFound();
+  const hasPrice = Number(item.priceDzd) > 0;
 
   return (
     <main className="min-h-screen bg-cream">
@@ -22,16 +23,8 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 lg:grid-cols-[1fr_360px] md:px-10">
-        <article className="glass rounded-glass p-7">
-          <h2 className="text-2xl font-semibold text-navy">À propos de ce séjour</h2>
-          <p className="mt-4 whitespace-pre-line leading-8 text-muted">{item.description ?? item.summary ?? "Une formule conçue par notre équipe pour vous accompagner sereinement."}</p>
-        </article>
-        <aside className="glass h-fit rounded-glass p-7">
-          <p className="text-sm text-muted">À partir de</p>
-          <p className="mt-1 text-3xl font-semibold text-navy">{item.priceDzd.toString()} DZD</p>
-          <p className="mt-2 text-sm text-muted">Tarif à confirmer selon dates et disponibilités.</p>
-          <a href={`/contact?package=${encodeURIComponent(item.slug)}`} className="mt-7 block rounded-2xl bg-navy px-5 py-3 text-center font-semibold text-white hover:bg-ink">Demander un devis</a>
-        </aside>
+        <article className="glass rounded-glass p-7"><h2 className="text-2xl font-semibold text-navy">À propos de ce séjour</h2><p className="mt-4 whitespace-pre-line leading-8 text-muted">{item.description ?? item.summary ?? "Une formule conçue par notre équipe pour vous accompagner sereinement."}</p></article>
+        <aside className="glass h-fit rounded-glass p-7"><p className="text-sm text-muted">{hasPrice ? "À partir de" : "Tarification"}</p><p className="mt-1 text-3xl font-semibold text-navy">{hasPrice ? item.priceDzd.toString() + " DZD" : "Sur devis"}</p><p className="mt-2 text-sm text-muted">Tarif à confirmer selon dates et disponibilités.</p><a href={"/reserver/" + encodeURIComponent(item.slug)} className="mt-7 block rounded-2xl bg-navy px-5 py-3 text-center font-semibold text-white hover:bg-ink">Demander une réservation</a></aside>
       </div>
     </main>
   );
