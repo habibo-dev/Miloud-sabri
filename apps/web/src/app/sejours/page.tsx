@@ -3,12 +3,22 @@ import { MapPin, Clock, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+type StayPackage = {
+  id: string;
+  slug: string;
+  imageUrl: string | null;
+  title: string;
+  summary: string | null;
+  durationDays: number;
+  destination: { name: string };
+};
+
 export default async function SejoursPage() {
-  const packages = await db.package.findMany({
+  const packages = (await db.package.findMany({
     where: { active: true },
     include: { destination: true },
     orderBy: [{ featured: "desc" }, { createdAt: "desc" }]
-  });
+  })) as StayPackage[];
 
   return (
     <main className="min-h-screen bg-cream px-6 py-16 md:px-10">
