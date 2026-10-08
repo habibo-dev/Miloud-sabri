@@ -1,0 +1,20 @@
+{
+  "name": "@miloud-sabri/database",
+  "private": true,
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@prisma/client": "^6.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "prisma": "^6.15.0",
+    "tsx": "^4.19.2"
+  },
+  "scripts": {
+    "generate": "prisma generate",
+    "postinstall": "prisma generate",
+    "seed": "tsx prisma/seed.ts",
+    "typecheck": "tsc --noEmit"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --global pnpm@11.24.0 && pnpm --version && pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm --filter @miloud-sabri/database generate && pnpm --filter web build"
+}
