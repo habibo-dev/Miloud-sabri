@@ -2,8 +2,9 @@ import { db } from "@miloud-sabri/database";
 import { bookingSchema } from "@miloud-sabri/validators";
 import { NextResponse } from "next/server";
 import { sendTransactionalEmail } from "@miloud-sabri/integrations";
+import { randomUUID } from "node:crypto";
 
-function reference() { return `MSV-${Date.now().toString(36).toUpperCase()}`; }
+function reference() { return `MSV-${randomUUID().replaceAll("-", "").slice(0, 12).toUpperCase()}`; }
 
 export async function POST(request: Request) {
   try {
