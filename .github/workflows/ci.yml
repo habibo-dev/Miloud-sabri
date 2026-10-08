@@ -6,7 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   typecheck:
@@ -19,23 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: pnpm install --no-frozen-lockfile
-      - name: Commit generated lockfile
-        if: github.event_name == 'push'
-        run: |
-          if [ ! -f pnpm-lock.yaml ]; then
-            echo "pnpm-lock.yaml was not generated"
-            exit 1
-          fi
-          git add pnpm-lock.yaml
-          if git diff --cached --quiet -- pnpm-lock.yaml; then
-            echo "Lockfile is already committed."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: add pnpm lockfile"
-          git push origin "HEAD:$GITHUB_REF_NAME"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @miloud-sabri/database generate
       - run: pnpm typecheck
       - run: pnpm --filter web build
