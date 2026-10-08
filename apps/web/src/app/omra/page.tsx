@@ -3,19 +3,11 @@ import { MapPin, ShieldCheck, Users } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-type OmraOffer = {
-  id: string;
-  slug: string;
-  durationDays: number;
-  title: string;
-  summary: string | null;
-};
-
 export default async function OmraPage() {
-  const offers = (await db.package.findMany({
+  const offers = await db.package.findMany({
     where: { active: true, destination: { slug: "makkah" } },
     include: { destination: true },
-  })) as OmraOffer[];
+  });
   return (
     <main className="min-h-screen bg-cream px-6 py-16 md:px-10">
       <div className="mx-auto max-w-6xl">
