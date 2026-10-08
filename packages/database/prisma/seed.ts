@@ -4,10 +4,10 @@ const db = new PrismaClient();
 
 async function main() {
   const destinations = [
-    { slug: "istanbul", name: "Istanbul", country: "Türkiye", region: "Europe & Asia", featured: true, imageUrl: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85" },
-    { slug: "dubai", name: "Dubai", country: "United Arab Emirates", region: "Middle East", featured: true, imageUrl: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85" },
-    { slug: "makkah", name: "La Mecque", country: "Arabie Saoudite", region: "Middle East", featured: true, imageUrl: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=85" },
-    { slug: "paris", name: "Paris", country: "France", region: "Europe", featured: false, imageUrl: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85" }
+    { slug: "istanbul", name: "Istanbul", country: "Türkiye", region: "Europe & Asia", featured: true, imageUrl: "/images/destinations/istanbul.svg" },
+    { slug: "dubai", name: "Dubai", country: "United Arab Emirates", region: "Middle East", featured: true, imageUrl: "/images/destinations/dubai.svg" },
+    { slug: "makkah", name: "La Mecque", country: "Arabie Saoudite", region: "Middle East", featured: true, imageUrl: "/images/destinations/mecca.svg" },
+    { slug: "paris", name: "Paris", country: "France", region: "Europe", featured: false, imageUrl: "/images/destinations/paris.svg" }
   ];
 
   for (const destination of destinations) {
