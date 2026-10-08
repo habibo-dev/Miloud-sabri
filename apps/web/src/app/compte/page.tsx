@@ -22,6 +22,8 @@ export default async function AccountPage() {
     },
   });
 
+  const bookings: BookingWithPackage[] = user?.bookings ?? [];
+
   return (
     <main className="min-h-screen bg-cream px-6 py-20">
       <div className="mx-auto max-w-5xl">
@@ -36,8 +38,8 @@ export default async function AccountPage() {
           <section className="glass rounded-glass p-6">
             <h2 className="text-xl font-semibold text-navy">Mes réservations</h2>
             <div className="mt-5 space-y-3">
-              {user?.bookings.length ? (
-                user.bookings.map((b: BookingWithPackage) => (
+              {bookings.length ? (
+                bookings.map((b) => (
                   <div key={b.id} className="rounded-2xl bg-white/70 p-4">
                     <p className="font-semibold text-ink">
                       {b.package?.title ?? "Réservation"}
