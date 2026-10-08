@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowRight, Check, Compass, Headphones, Plane, ShieldCheck, Sparkles } from "lucide-react";
 
 const destinations = [
-  { name: "Istanbul", country: "Turquie", image: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85" },
-  { name: "Dubai", country: "Émirats Arabes Unis", image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85" },
-  { name: "La Mecque", country: "Arabie Saoudite", image: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=85" },
+  { name: "Istanbul", country: "Turquie", image: "/images/destinations/istanbul.svg" },
+  { name: "Dubai", country: "Émirats Arabes Unis", image: "/images/destinations/dubai.svg" },
+  { name: "La Mecque", country: "Arabie Saoudite", image: "/images/destinations/mecca.svg" },
 ];
 
 const navigation = [
@@ -46,7 +46,7 @@ export default function HomePage() {
           <div className="relative">
             <div className="glass overflow-hidden rounded-[32px] p-3">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[25px] bg-[#DCE5E9]">
-                <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1200&q=85" alt="Paysage de voyage" className="h-full w-full object-cover" />
+                <img src="/images/travel-hero.svg" alt="Paysage de voyage" className="h-full w-full object-cover" />
                 <div className="absolute inset-x-5 bottom-5 glass rounded-2xl p-5">
                   <p className="text-xs font-medium uppercase tracking-[.18em] text-muted">Destination du moment</p>
                   <div className="mt-1 flex items-end justify-between gap-4"><div><h2 className="text-2xl font-semibold text-navy">Istanbul</h2><p className="text-sm text-muted">Culture · Shopping · Gastronomie</p></div><span className="rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold text-navy">Sur devis</span></div>
