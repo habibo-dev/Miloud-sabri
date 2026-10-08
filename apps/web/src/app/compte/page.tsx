@@ -2,25 +2,6 @@ import { auth } from "../../../auth";
 import { db } from "@miloud-sabri/database";
 import { redirect } from "next/navigation";
 
-type AccountBooking = {
-  id: string;
-  reference: string;
-  status: string;
-  package: { title: string } | null;
-};
-
-type AccountDocument = {
-  id: string;
-  name: string;
-  status: string;
-};
-
-type AccountNotification = {
-  id: string;
-  title: string;
-  body: string;
-};
-
 export default async function AccountPage() {
   const session = await auth();
   if (!session?.user?.email) redirect("/connexion");
@@ -37,10 +18,6 @@ export default async function AccountPage() {
     },
   });
 
-  const bookings = (user?.bookings ?? []) as AccountBooking[];
-  const documents = (user?.documents ?? []) as AccountDocument[];
-  const notifications = (user?.notifications ?? []) as AccountNotification[];
-
   return (
     <main className="min-h-screen bg-cream px-6 py-20">
       <div className="mx-auto max-w-5xl">
@@ -55,14 +32,14 @@ export default async function AccountPage() {
           <section className="glass rounded-glass p-6">
             <h2 className="text-xl font-semibold text-navy">Mes réservations</h2>
             <div className="mt-5 space-y-3">
-              {bookings.length ? (
-                bookings.map((b) => (
-                  <div key={b.id} className="rounded-2xl bg-white/70 p-4">
+              {user?.bookings.length ? (
+                user.bookings.map((booking) => (
+                  <div key={booking.id} className="rounded-2xl bg-white/70 p-4">
                     <p className="font-semibold text-ink">
-                      {b.package?.title ?? "Réservation"}
+                      {booking.package?.title ?? "Réservation"}
                     </p>
                     <p className="mt-1 text-sm text-muted">
-                      {b.reference} · {b.status}
+                      {booking.reference} · {booking.status}
                     </p>
                   </div>
                 ))
@@ -77,11 +54,11 @@ export default async function AccountPage() {
           <section className="glass rounded-glass p-6">
             <h2 className="text-xl font-semibold text-navy">Documents</h2>
             <div className="mt-5 space-y-3">
-              {documents.length ? (
-                documents.map((d) => (
-                  <div key={d.id} className="rounded-2xl bg-white/70 p-4">
-                    <p className="font-semibold text-ink">{d.name}</p>
-                    <p className="mt-1 text-sm text-muted">{d.status}</p>
+              {user?.documents.length ? (
+                user.documents.map((document) => (
+                  <div key={document.id} className="rounded-2xl bg-white/70 p-4">
+                    <p className="font-semibold text-ink">{document.name}</p>
+                    <p className="mt-1 text-sm text-muted">{document.status}</p>
                   </div>
                 ))
               ) : (
@@ -93,11 +70,11 @@ export default async function AccountPage() {
           <section className="glass rounded-glass p-6 md:col-span-2">
             <h2 className="text-xl font-semibold text-navy">Notifications</h2>
             <div className="mt-5 space-y-3">
-              {notifications.length ? (
-                notifications.map((n) => (
-                  <div key={n.id} className="rounded-2xl bg-white/70 p-4">
-                    <p className="font-semibold text-ink">{n.title}</p>
-                    <p className="mt-1 text-sm text-muted">{n.body}</p>
+              {user?.notifications.length ? (
+                user.notifications.map((notification) => (
+                  <div key={notification.id} className="rounded-2xl bg-white/70 p-4">
+                    <p className="font-semibold text-ink">{notification.title}</p>
+                    <p className="mt-1 text-sm text-muted">{notification.body}</p>
                   </div>
                 ))
               ) : (
