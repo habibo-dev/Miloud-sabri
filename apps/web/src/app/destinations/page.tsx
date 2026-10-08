@@ -2,12 +2,12 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const destinations = [
-  ["Istanbul", "Turquie", "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85"],
-  ["Dubai", "Émirats Arabes Unis", "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85"],
-  ["La Mecque", "Arabie Saoudite", "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=85"],
-  ["Paris", "France", "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"],
-  ["Antalya", "Turquie", "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=85"],
-  ["Tassili n'Ajjer", "Algérie", "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1200&q=85"],
+  ["Istanbul", "Turquie", "/images/destinations/istanbul.svg"],
+  ["Dubai", "Émirats Arabes Unis", "/images/destinations/dubai.svg"],
+  ["La Mecque", "Arabie Saoudite", "/images/destinations/mecca.svg"],
+  ["Paris", "France", "/images/destinations/paris.svg"],
+  ["Antalya", "Turquie", "/images/destinations/dubai.svg"],
+  ["Tassili n'Ajjer", "Algérie", "/images/destinations/istanbul.svg"],
 ];
 
 export default function DestinationsPage() {
